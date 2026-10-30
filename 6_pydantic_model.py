@@ -26,7 +26,9 @@ class User(BaseModel):
 
 @app.post("/create_user")
 def create_user(user:User):
-    return user  
+    return user 
+
+
 
 
       
