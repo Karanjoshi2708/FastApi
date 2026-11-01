@@ -3,11 +3,10 @@ import time
 
 app = FastAPI()
 
-
 @app.middleware("http")
-def log_middleware(request:Request, call_next):
+async def log_middleware(request:Request, call_next):
     start_time = time.time()
-    response = call_next(request)
+    response = await call_next(request)
     process_time = time.time() - start_time
     print(f"Path {request.url.path} |  time: {process_time}")
     return response
