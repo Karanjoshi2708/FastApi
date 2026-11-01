@@ -6,7 +6,9 @@ app = FastAPI()
 
 @app.get("/")
 async def home():
-    await asyncio.sleep(3)
+    print("123")
+    await asyncio.sleep(10)
+    print("111")
     return {
         "message":"async ApI"
     }
