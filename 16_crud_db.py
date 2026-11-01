@@ -18,7 +18,7 @@ class Todo(Base):
 
     id = Column(Integer , primary_key=True , index=True)
     title = Column(String)
-    completed = Column  (String)
+    completed = Column(String)
 
 Base.metadata.create_all(bind=engine)
 
