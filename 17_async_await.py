@@ -1,4 +1,4 @@
-import time
+import time 
 import asyncio
 from fastapi import FastAPI 
 
@@ -7,7 +7,7 @@ app = FastAPI()
 @app.get("/")
 async def home():
     print("123")
-    await asyncio.sleep(10)
+    await asyncio.sleep(3)
     print("111")
     return {
         "message":"async ApI"
