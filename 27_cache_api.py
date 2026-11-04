@@ -40,4 +40,5 @@ def get_news():
 
     return {
         "time_taken": time_taken,
-        "news": cache_data[:5]} 
+        "news": cache_data[:5]}  
+ 
