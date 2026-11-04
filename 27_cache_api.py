@@ -5,24 +5,39 @@ import time
 
 app = FastAPI()
 
+#Cache storage
+cache_data = []
+last_fetch=0
+
 @app.get("/news")
 def get_news():
-    url = "https://news.ycombinator.com/"
 
-    response = requests.get(url)
+    global cache_data, last_fetch
+
+    start = time.time()
+
+    if time.time() - last_fetch >60:
+        print("Fetching fresh data")
+
+        url = "https://news.ycombinator.com/"
+
+        response = requests.get(url)
      
-    soup = BeautifulSoup(response.text, "html.parser")
+        soup = BeautifulSoup(response.text, "html.parser")
 
-    title = []
+        cache_data = [
+            item.text for item in soup.find_all("span", class_="titleline")]
 
-    for item in soup.find_all("span", class_="titleline"):
-        title.append(item.text)
+        last_fetch = time.time()
 
+    else:
+        print("Returning cached data")
 
-    #Pagination Logic
-    start = (page - 1) * limit
-    end = start + limit
+    end = time.time()
+
+    time_taken = end - start
+    print("time taken:", time_taken)
 
     return {
-        "news": title
-    }
+        "time_taken": time_taken,
+        "news": cache_data[:5]} 
