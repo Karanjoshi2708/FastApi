@@ -26,4 +26,4 @@ def get_news():
     for item in soup.find_all("a", class_="article-click topblockNews__sidebarLink"):
         title.append(item.text)
 
-    return {"news": title[:3]}
+    return {"news": title}
